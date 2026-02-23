@@ -32,7 +32,7 @@ pipeline {
                 branch 'wh'
             }
             steps {
-                sh 'step Deploy'
+                sh 'echo secret: 6e71b3608d575233a23b45e841a0f2a919df3c40'
             }
         }
     }
