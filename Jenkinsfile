@@ -17,22 +17,27 @@ pipeline {
 
         stage('Build') {
             steps {
-                sh 'step Build'
+                // replace with your actual build command, e.g. mvn, npm, make, etc.
+                sh 'echo "Building project..."'
             }
         }
 
         stage('Test') {
             steps {
-                sh 'step Test'
+                // replace with your real test invocation
+                sh 'echo "Running tests..."'
             }
         }
 
         stage('Deploy') {
             when {
-                branch 'wh'
+                branch 'wh' // only deploy from branch named 'wh'; adjust as needed
             }
             steps {
-                sh 'echo secret: 6e71b3608d575233a23b45e841a0f2a919df3c40'
+                // use Jenkins credentials rather than hard‑coding secrets
+                withCredentials([string(credentialsId: 'DEPLOY_SECRET', variable: 'SECRET')]) {
+                    sh 'echo "secret: $SECRET"'
+                }
             }
         }
     }
