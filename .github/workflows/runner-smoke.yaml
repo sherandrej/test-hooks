@@ -1,0 +1,16 @@
+# Smoke test for EKS ARC self-hosted runner (scale set label must match Terraform arc_repo_level_runner_labels).
+name: Runner smoke
+
+on:
+  workflow_dispatch:
+
+jobs:
+  probe:
+    runs-on: [self-hosted, test-hooks-ci]
+    timeout-minutes: 15
+    steps:
+      - name: Who am I
+        run: |
+          set -eux
+          uname -a
+          echo "Runner OK from $(hostname)"
