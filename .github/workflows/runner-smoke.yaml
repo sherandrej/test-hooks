@@ -1,12 +1,18 @@
-# Smoke test for EKS ARC self-hosted runner (scale set label must match Terraform arc_repo_level_runner_labels).
+# Smoke test for EKS ARC runner scale set.
+# ARC: use runnerScaleSetName as a string, OR only scaleSetLabels — do NOT prefix with
+# "self-hosted"; that is for classic self-hosted runners and will not match the scale set queue.
+# See: https://docs.github.com/en/actions/hosting-your-own-runners/managing-self-hosted-runners-with-actions-runner-controller/using-actions-runner-controller-runners-in-a-workflow
 name: Runner smoke
 
 on:
+  push:
+    branches:
+      - master
   workflow_dispatch:
 
 jobs:
   probe:
-    runs-on: [self-hosted, test-hooks-ci]
+    runs-on: test-hooks-trial
     timeout-minutes: 15
     steps:
       - name: Who am I
